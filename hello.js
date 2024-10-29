@@ -1,3 +1,3 @@
 <script>
-  window.location.href = "home.html";
+  window.location.href = "money.html";
 </script>
