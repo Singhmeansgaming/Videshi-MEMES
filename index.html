@@ -4,6 +4,13 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
    </head>
    <body>
+      <label class="password_label" for="text_input">Password</label>
+<input id="text_input" name="text_input" class="password visible" type="text" spellcheck="false">
+<input class="password hidden" type="password" disabled>
+<img class="left" src="https://raw.githubusercontent.com/Nik439/Images/master/cpc-hide-reveal/hinge.svg" draggable="false">
+<img class="handle" src="https://raw.githubusercontent.com/Nik439/Images/master/cpc-hide-reveal/handle.svg" draggable="false">
+<img class="right" src="https://raw.githubusercontent.com/Nik439/Images/master/cpc-hide-reveal/hinge.svg" draggable="false">
+<script src="script.js"></script>
        <h1>SARAFIAN MEME PAGE</h1>
     <br>
        <br>
@@ -62,5 +69,139 @@ h1{
  border: 10px solid black;
  float: left;
 }
+   @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Press Start 2P", cursive;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #50bdc7;
+  overflow: hidden;
+}
+body:before {
+  z-index: -1;
+  content: "";
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background-image: url("https://raw.githubusercontent.com/Nik439/Images/master/cpc-hide-reveal/hint.png");
+  background-repeat: no-repeat;
+  background-size: 100px;
+  background-position: calc(50% + 195px) calc(50% - 55px);
+  transform: rotate(-23deg);
+  opacity: 0.7;
+}
+body.grabbing {
+  cursor: grabbing;
+}
+body.grabbing * {
+  cursor: grabbing !important;
+}
+body .password_label {
+  position: absolute;
+  font-size: 25px;
+  transform: translateY(-70px);
+}
+body .password {
+  font-size: 20px;
+  outline: none;
+  width: 300px;
+  height: 80px;
+  border: 1px solid #686868;
+}
+body .password.visible {
+  letter-spacing: 12px;
+  padding: 20px 7px 20px 35px;
+  color: black;
+}
+body .password.hidden {
+  padding: 20px;
+  font-size: 50px;
+  pointer-events: none;
+  z-index: 1;
+  letter-spacing: -18px;
+  position: absolute;
+  opacity: 1;
+  background-image: url("https://raw.githubusercontent.com/Nik439/Images/master/cpc-hide-reveal/glass.svg");
+  transform-origin: 50% 100%;
+}
+body .password.hidden.slide {
+  transform: rotateX(180deg);
+}
+body img {
+  position: absolute;
+  user-select: none;
+}
+body img.left {
+  transform: translate(-100px, 40px);
+}
+body img.right {
+  transform: translate(100px, 40px);
+}
+body img.handle {
+  transform: translateY(-40px);
+  z-index: 3;
+  transform-origin: 50% calc(50% + 80px);
+  cursor: grab;
+}
    </style>
-<script>console.log('JavaScript Console');</script>
+<script>console.log('JavaScript Console');
+const text = document.querySelector('input.password.visible');
+const pass = document.querySelector('input.password.hidden');
+const handle = document.querySelector('img.handle');
+
+text.addEventListener('input', (e)=>{
+  pass.value = e.target.value;
+});
+
+let startingPos;
+let paneUp = true;
+let angle;
+
+handle.addEventListener('mousedown', (e)=>{
+  startingPos = e.clientY;
+  document.body.classList.add('grabbing');
+})
+
+document.addEventListener('mousemove', (e)=>{
+  if (startingPos) {
+    if (paneUp) {
+      if (e.clientY > startingPos && e.clientY < startingPos+160) {
+        angle = ((e.clientY-startingPos) * 180) / 160;
+        pass.style.transform = `rotateX(${angle}deg)`;
+        handle.style.transform = `translateY(-40px) rotateX(${angle}deg)`;
+      }
+    } else {
+      if (e.clientY < startingPos && e.clientY > startingPos-160) {
+        angle = 360 + ((e.clientY-startingPos-160) * 180) / 160;
+        pass.style.transform = `rotateX(${angle}deg)`;
+        handle.style.transform = `translateY(-40px) rotateX(${angle}deg)`;
+      }
+    }
+  }
+})
+
+document.addEventListener('mouseup', (e)=>{
+  document.body.classList.remove('grabbing');
+  if (startingPos) {
+    if (angle >= 90) {
+      pass.style.transform = `rotateX(180deg)`;
+      handle.style.transform = `translateY(-40px) rotateX(180deg)`;
+      paneUp = false;
+    } else {
+      pass.style.transform = `rotateX(0)`;
+      handle.style.transform = `translateY(-40px) rotateX(0)`;
+      paneUp = true;
+    }
+  }
+
+  startingPos = undefined;
+})</script>
