@@ -1,54 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-        <title>
-                Password Stopper
-        </title>
-       
-<script language="JavaScript">
- 
-function Tryit() {
-  var location;
-  var password;
-  password=this.document.testingForm.testingTextBox.value
-  location=password + ".html"
-  fetch(location)
-  theStopper=window.close()
-}
- 
-function fetch(location) {
-  var root;
-  if (opener.closed) {
-    root=window.open('','thePasswordStopper','toolbar=yes,location=yes,status=yes,menubar=yes,scrollbars=yes,resizable=yes,copyhistory=no');
-    root.location.href = location;
-  } else {
-    opener.location.href = location;
-  }
-}
- 
-</script>
-       
-        <style type="text/css">
-        </style>
+    <style>
+        #container {
+            background-color: #f0f8ff;
+            text-align: center;
+        }
+    </style>
 </head>
- 
 <body>
-<table border="1">
-<tr>
-        <td><h2 style="text-align:center;">Stop!!! <br /> You'll need a password to go in the next page. <br /> To avoid scam.</h2></td>
-</tr>
-<tr>
-        <td>
-                <form name="testingForm" style="margin:auto; text-align:center;">
-                        <br />
-                        <input type="text" name="testingTextBox" autofocus='autofocus' style="font-size:18px; border-radius:4px; text-indent:5px;">
-                        <br />
-                        <br />
-                </form>
-        </td>
-</tr>
-</table>
- 
+    <div id="container">
+        <h2>Correct Password</h2>
+        <h3>Welcome to TutorialsPoint..</h3>
+    </div>
+    <script>
+        let password = "tutorial";
+        (function passcodeprotect() {
+            let passcode = prompt("Enter PassCode");
+            while (passcode !== password) {
+                alert("Incorrect PassCode");
+                return passcodeprotect();
+            }
+        }());
+        alert('Welcome To The TP..!');
+        document.getElementById("container")
+            .style.display = "block";
+    </script>
 </body>
- 
 </html>
