@@ -4,6 +4,10 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
    </head>
    <body>
+      <form class="passform" action="index.html">
+         password: <input type="password" required id="pass1">
+         <input type="submit">
+      </form>
        <h1>SARAFIAN MEME PAGE</h1>
     <br>
        <br>
@@ -65,4 +69,17 @@ h1{
    </style>
 
 
-<script>console.log('JavaScript Console');</script>
+<script>console.log('JavaScript Console');
+var password = "proplayer";
+
+   function passcheck() {
+
+      if(document.getElementById('pass1').value != password) {
+         alert('CHOCO! LEGA KYA, GALAT PASSWORD HAI...');
+         return false
+      }
+      if(document.getElementById('pass1').value == password) {
+         alert('SUHI HAI, CHEETAH HI KEHDE');
+      }
+   }
+</script>
