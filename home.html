@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <title>
+                Password Stopper
+        </title>
+       
+<script language="JavaScript">
+ 
+function Tryit() {
+  var location;
+  var password;
+  password=this.document.testingForm.testingTextBox.value
+  location=password + ".html"
+  fetch(location)
+  theStopper=window.close()
+}
+ 
+function fetch(location) {
+  var root;
+  if (opener.closed) {
+    root=window.open('','thePasswordStopper','toolbar=yes,location=yes,status=yes,menubar=yes,scrollbars=yes,resizable=yes,copyhistory=no');
+    root.location.href = location;
+  } else {
+    opener.location.href = location;
+  }
+}
+ 
+</script>
+       
+        <style type="text/css">
+        </style>
+</head>
+ 
+<body>
+ 
+<img src="image/11.gif" width="150" height="150" style="margin-left:170px;">
+ 
+<table border="1">
+<tr>
+        <td><h2 style="text-align:center;">Stop!!! <br /> You'll need a password to go in the next page. <br /> To avoid scam.</h2></td>
+</tr>
+<tr>
+        <td>
+                <form name="testingForm" style="margin:auto; text-align:center;">
+                        <br />
+                        <input type="text" name="testingTextBox" autofocus='autofocus' style="font-size:18px; border-radius:4px; text-indent:5px;">
+                        <br />
+                        <br />
+                        <img src="image/button.png" width="150" height="75" onClick="Tryit(this.form)" style="cursor:pointer;">
+                </form>
+        </td>
+</tr>
+</table>
+ 
+</body>
+ 
+</html>
